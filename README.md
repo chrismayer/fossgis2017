@@ -1,2 +1,2 @@
-# fossgis2017
-Materials for the FOSSGIS conference 2017 in Passau, Germany
+# FOSSGIS 2017, Passau
+Materialien für die FOSSGIS Konferenz 2017 in Passau.
