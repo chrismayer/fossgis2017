@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="author" content="Marc Jansen" />
+    <meta name="author" content="Christian Mayer" />
+    <title>GeoExt3 &mdash; Universale WebGIS Applikationen mit OpenLayers 3 und ExtJS6 | Vortrag auf der FOSSGIS 2016, Salzburg</title>
+    <meta name="description" content="GeoExt3 &mdash; Universale WebGIS Applikationen mit OpenLayers 3 und ExtJS6" />
+
+    <!--[if lt IE 9]>
+    <script src="../shared/lib/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="../shared/lib/reveal.js-3.3.0/css/reveal.css" />
+    <link rel="stylesheet" href="../shared/lib/reveal.js-3.3.0/css/theme/beige.css" />
+
+    <link rel="stylesheet" href="../shared/css/customized.css" />
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../shared/lib/reveal.js-3.3.0/lib/css/zenburn.css" />
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ?
+        '../shared/lib/reveal.js-3.3.0/css/print/pdf.css' :
+        '../shared/lib/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+  </head>
+  <body>
+
+
+<!-- BEGIN OF SLIDES -->
+
+
+    <div class="reveal">
+      <div class="slides">
+
+        <section id="start">
+          <h1>GeoExt3</h1>
+          <img src="../shared/img/geoext-logo.png" class="plain" width=140>
+          <h3>GeoExt 3 in der Praxis</h3>
+          <p>
+            <small>Christian Mayer &amp; Marc Jansen</small>
+          </p>
+          <p>
+            <span style="font-size: small;">FOSSGIS 2017, Passau, 23.03.2017</small>
+          </p>
+        </section>
+
+        <section id="toc">
+          <h2>Gliederung</h2>
+          <ul>
+            <li>Über&hellip;</li>
+            <li>GeoExt: Stand</li>
+            <li>…</li>
+            <li>…</li>
+          </ul>
+        </section>
+
+        <section id="author-christian-mayer">
+          <h2>Christian Mayer</h2>
+          <div class="split-info">
+            <div class="part" style="width:35%">
+              <img src="../shared/img/cm.jpg" class="plain" width="200"/><br />
+              <small>
+                <a class="email" href="mailto:chris@meggsimum">chris@meggsimum.de</a><br />
+                <a class="github" href="https://github.com/chrismayer/">@chrismayer</a><br />
+                <a class="twitter" href="https://twitter.com/geofootballer/">@geofootballer</a><br />
+              </small><br />
+            </div>
+            <div class="part"  style="width:60%">
+              <div class="enumeration">
+                <ul>
+                  <li>Geoinformatiker</li>
+                  <li>Softwareentwickler &amp; -architekt</li>
+                  <li>Kernentwickler und PSC Mitglied GeoExt</li>
+                  <li>Sprecher &amp; Trainer <br /> national &amp; international</li>
+                  <li>OSGeo Foundation Charter Member</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div style="clear:both"></div>
+        </section>
+
+        <section id="about-company-meggsimum">
+          <h2>meggsimum</h2>
+          <div class="split-info">
+            <div class="part" style="width:35%">
+              <img src="../shared/img/meggsimum-logo.png" class="plain" width="200"/>
+              <br /><br />
+              <a class="github" href="https://github.com/meggsimum/">@meggsimum</a><br />
+              <a class="twitter" href="https://twitter.com/meggsimum/">@meggsimum</a>
+            </div>
+            <div class="part" style="width:60%">
+              <div class="enumeration">
+                <ul>
+                  <li><a href="https://meggsimum.de/">meggsimum.de</a></li>
+                  <li>Dienstleistungen im Bereich GIS, Webmapping &amp; GDI</li>
+                  <li>Maßgeschneiderte WebGIS-Lösungen</li>
+                  <li>Softwarekonzepte und Softwareentwicklung</li>
+                  <li>Geodaten</li>
+                  <li>Beratung und Schulung</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div style="clear:both"></div>
+        </section>
+
+        <section id="author-marc-jansen">
+          <h2>Marc Jansen</h2>
+          <div class="split-info">
+            <div class="part" style="width:35%">
+              <img src="../shared/img/mj.jpg" class="plain" width="200"/><br />
+              <small>
+                <a class="email" href="mailto:jansen@terrestris.de">jansen@terrestris.de</a><br />
+                <a class="github" href="https://github.com/marcjansen/">@terrestris</a><br />
+                <a class="twitter" href="https://twitter.com/selectoid/">@selectoid</a><br />
+              </small><br />
+              <img src="../shared/img/openlayers_de_1ed.png" class="plain" width=100 />
+            </div>
+            <div class="part" style="width:60%">
+              <div class="enumeration">
+                <ul>
+                  <li>Seit 2007 Entwickler / Projektleiter bei terrestris</li>
+                  <li>Kernentwickler und PSC Mitglied GeoExt</li>
+                  <li>Kernentwickler OpenLayers</li>
+                  <li>Buchautor "OpenLayers"</li>
+                  <li>Sprecher &amp; Trainer <br /> national &amp; international</li>
+                  <li>OSGeo Foundation Charter Member</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div style="clear:both"></div>
+        </section>
+
+        <section id="about-company-terrestris">
+          <h2>terrestris</h2>
+          <div class="split-info">
+            <div class="part" style="width:35%">
+              <img src="../shared/img/terrestris-logo.png" class="plain" width="200"/>
+              <br /><br />
+              <a class="github" href="https://github.com/terrestris/">@terrestris</a><br />
+              <a class="twitter" href="https://twitter.com/terrestrisde/">@terrestrisde</a>
+            </div>
+            <div class="part" style="width:60%">
+              <div class="enumeration">
+                <ul>
+                  <li><a href="https://terrestris.de/">terrestris.de</a></li>
+                  <li>OpenSource GIS aus Bonn</li>
+                  <li>Entwicklung, Projekte &amp; Support/Schulung</li>
+                  <li>Beratung, Planung, Implementierung &amp; Wartung</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div style="clear:both"></div>
+        </section>
+
+        <section>
+          <h1>GeoExt</h1>
+          <h2>Aktueller Stand</h2>
+        </section>
+
+        <section>
+          <h2>GeoExt</h2>
+          <ul>
+            <li>JavaScript-Framework für "Rich Web Mapping Applications"</li>
+            <li>Basiert auf OpenLayers und ExtJS</li>
+            <li>Erweitert ExtJS um räumliche Komponenten</li>
+            <li>Grafische Komponenten und Daten-Paket</li>
+            <li>OpenSource, © OSGeo</li>
+            <li>Sei März 2009 (7,5 Jahre)</li>
+          </ul>
+        </section>
+
+        <section
+          data-background-image="img/desktop-complex-composed.png"
+          data-background-size="80% auto">
+          <p>&nbsp;</p>
+        </section>
+
+        <section>
+          <h2>Versionen</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>GeoExt</th>
+                <th>ExtJS</th>
+                <th>OpenLayers</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1.1</td>
+                <td>3.x</td>
+                <td>2.10</td>
+              </tr>
+              <tr>
+                <td>2.1</td>
+                <td>4.2.x / 5.1.x</td>
+                <td>2.13.1</td>
+              </tr>
+              <tr class="fragment highlight-blue">
+                <td>3 (master)</td>
+                <td>6.x</td>
+                <td>3.x</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="thanks-questions">
+          <h4>Vielen Dank</h4>
+          <hr />
+          <h1 style="font-size:3.0em">Fragen &amp; Anmerkungen?</h1>
+          <hr />
+          <p class="subtle">
+            <a href="#/imprint">Impressum</a>
+          </p>
+        </section>
+
+        <section id="imprint">
+          <h2>Impressum</h2>
+          <h4>Autoren</h4>
+          <div style="width: 45%; float: right;">
+            <address style="text-align: right">
+              <strong>Christian Mayer</strong><br />
+              <span style="font-size: smaller;">
+              meggsimum<br />
+              Hauptstraße 165a<br />
+              67125 Dannstadt-Schauernheim<br />
+              chris@meggsimum.de
+              </span>
+            </address>
+          </div>
+          <div style="width: 45%; float: left;">
+            <address style="text-align: left">
+              <strong>Marc Jansen</strong><br />
+              <span style="font-size: smaller;">
+              terrestris GmbH &amp; Co. KG<br />
+              Kölnstr. 99<br />
+              53111 Bonn<br />
+              jansen@terrestris.de
+              </span>
+            </address>
+          </div>
+          <h4 style="clear:both;">Lizenz</h4>
+          <p id="license">
+            Diese Folien sind unter <a
+            href="http://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA</a>
+            veröffentlicht.
+          </p>
+          <p>
+            <a href="https://rawgit.com/chrismayer/fossgis2017/master/geoext3-talk/index.html">Vortragsfolien</a>,
+            <a href="https://rawgit.com/chrismayer/fossgis2017/master/geoext3-talk/GeoExt3-Universale-WebGIS-Applikationen-mit-OpenLayers-3-und-ExtJS6.pdf">PDF-Version</a>,
+            <a href="https://github.com/chrismayer/fossgis2016">git repository</a>
+          </p>
+        </section>
+
+      </div>
+    </div>
+
+
+<!-- END OF SLIDES -->
+
+
+    <script src="../shared/lib/reveal.js-3.3.0/lib/js/head.min.js"></script>
+    <script src="../shared/lib/reveal.js-3.3.0/js/reveal.js"></script>
+    <script>
+(function () {
+  var revealPath = '../shared/lib/reveal.js-3.3.0/';
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    history: true,
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      {
+        src: revealPath + 'plugin/markdown/marked.js'
+      },
+      {
+        src: revealPath + 'plugin/markdown/markdown.js'
+      },
+      {
+        src: revealPath + 'plugin/notes/notes.js',
+        async: true
+      },
+      {
+        src: revealPath + 'plugin/highlight/highlight.js',
+        async: true,
+        callback: function() {
+          hljs.initHighlightingOnLoad();
+        }
+      }
+    ]
+  });
+}());
+    </script>
+  </body>
+</html>
