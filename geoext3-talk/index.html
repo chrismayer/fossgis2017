@@ -7,7 +7,6 @@
     <meta name="author" content="Christian Mayer" />
     <title>GeoExt 3 in der Praxis | Vortrag auf der FOSSGIS 2017, Passau</title>
     <meta name="description" content="GeoExt 3 in der Praxis" />
-
     <!--[if lt IE 9]>
     <script src="../shared/lib/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
     <![endif]-->
@@ -15,6 +14,7 @@
     <link rel="stylesheet" href="../shared/lib/reveal.js-3.3.0/css/reveal.css" />
     <link rel="stylesheet" href="../shared/lib/reveal.js-3.3.0/css/theme/beige.css" />
 
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Lato|Merriweather" rel="stylesheet">
     <link rel="stylesheet" href="../shared/css/customized.css" />
 
     <!-- Theme used for syntax highlighting of code -->
@@ -57,9 +57,10 @@
           <h2>Gliederung</h2>
           <ul>
             <li>Über&hellip;</li>
-            <li>GeoExt: Stand</li>
-            <li>…</li>
-            <li>…</li>
+            <li>Stand</li>
+            <li>Praxistipps</li>
+            <li>Projekt-Beispiele</li>
+            <li>Aufbau Projektsetup</li>
           </ul>
         </section>
 
@@ -184,7 +185,13 @@
 
         <section
           data-background-image="img/desktop-complex-composed.png"
-          data-background-size="80% auto">
+          data-background-size="85% auto">
+          <p>&nbsp;</p>
+        </section>
+
+        <section
+          data-background-image="img/bfs-composed.png"
+          data-background-size="85% auto">
           <p>&nbsp;</p>
         </section>
 
@@ -224,14 +231,93 @@
         </section>
 
         <section>
-          <img style="display:block;" src="img/v3.0.0-fireworks-2.png" alt="GeoExt Release v3.0.0" />
-          <p><a href="https://github.com/geoext/geoext3/releases">GeoExt v3.0.0 Release</a></p>
-          <p style="font-size: .5em;">Photo By <a href="//commons.wikimedia.org/wiki/User:Iotatau" title="User:Iotatau">Jochen Teufel</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=7235554">Link</a></span>
+          <img style="margin: 0" src="img/v3.0.0-fireworks-2.png" alt="GeoExt Release v3.0.0" />
+          <p style="margin: 0;"><a href="https://github.com/geoext/geoext3/releases">GeoExt v3.0.0 Release</a></p>
+          <p style="margin: 0; font-size: .5em;">Photo By <a href="//commons.wikimedia.org/wiki/User:Iotatau" title="User:Iotatau">Jochen Teufel</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=7235554">Link</a></span>
         </section>
 
         <section>
-          <h1>Tipps aus der Praxis</h1>
-          <h2>Dos and Dont's für die Arbeit mit GeoExt 3</h2>
+          <h1>Praxistipps</h1>
+          <p>&nbsp;</p>
+          <h3>Do's and Don'ts <br/> für die Arbeit mit GeoExt 3</h3>
+          <!-- https://www.visualthesaurus.com/cm/wc/dos-and-donts-or-dos-and-donts/ -->
+        </section>
+
+        <section>
+          <h2>Do's</h2>
+          <ul>
+              <li>GeoExt via <code>git clone</code></li>
+              <li>Zielgruppe festlegen (&rArr; <code>toolkit</code>)</li>
+              <li>Grundsätzlich: sencha cmd verwenden</li>
+              <li>Manchmal: <code>ext-all-debug.js</code></li>
+              <li>MVVM verwenden</li>
+              <li><code>sencha app watch</code> &amp; <code>sencha app watch</code></li>
+              <li>Bei upgrade (etwa OpenLayers), <code>console</code> beachten</li>
+              <li>Testing und MVVM: …</li>
+          </ul>
+        </section>
+
+        <section>
+            <h2>Tests &amp; MVVM</h2>
+            <p>Strategie</p>
+            <ul>
+                <li>Node.js</li>
+                <li>Server aufsetzen der <code>view</code>s, <code>viewmodel</code>s &amp; <code>controller</code> ausliefert</li>
+                <li>Jeweils für <code>classic</code> wie <code>modern</code></li>
+                <li><code>Ext.Loader</code> konfigurieren</li>
+                <li style="font-size: smaller;">
+                    <a href="https://github.com/KaiVolland"><code>@kaivolland</code></a>
+                    &amp;
+                    <a href="https://github.com/marcjansen"><code>@marcjansen</code></a>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2><code>Ext.Loader</code> konfigurieren</h2>
+            <pre><code data-trim>
+Ext.Loader.setConfig({
+    enabled: true,
+    paths: {
+        GeoExt: '../../lib/GeoExt/src',
+        MyProject: 'http://localhost:3000'
+    }
+});
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Quelltext-Server</h2>
+            <pre><code data-trim editable>
+var express = require('express');
+var path = require('path');
+var serveStatic = require('serve-static');
+
+var rootDir = path.join(__dirname, '..', '..');
+// directories with source code, here for classic
+var classicDir = path.normalize(path.join(rootDir, 'classic', 'src'));
+var appDir = path.normalize(path.join(rootDir, 'app'));
+
+var classicServer = express(); // Remember to configure CORS
+
+classicServer.use(serveStatic(classicDir));
+classicServer.use(serveStatic(appDir));
+
+classicServer.listen(3000);
+
+// same for modern
+            </code></pre>
+        </section>
+
+        <section>
+          <h2>Don'ts</h2>
+          <ul>
+              <li>Nicht auf sencha cmd alleine verlassen</li>
+              <li><code>modern</code>-Toolkit ignorieren</li>
+              <li>Mixen von controller-Logic / inline-handlern</li>
+              <li><a href="https://github.com/senchalabs/jsduck">JSDuck</a> ignorieren</li>
+              <li>Andere Frameworks Bibliotheken ignorieren</li>
+          </ul>
         </section>
 
         <section>
@@ -287,6 +373,30 @@
         <section
             data-background-image="img/sd-kama/sd-kama-damage.png"
             data-background-size="auto auto">
+        </section>
+
+        <section
+          data-background-image="img/bfs-01.png"
+          data-background-size="auto auto">
+          <p>&nbsp;</p>
+        </section>
+
+        <section
+          data-background-image="img/bfs-02.png"
+          data-background-size="auto auto">
+          <p>&nbsp;</p>
+        </section>
+
+        <section
+          data-background-image="img/bfs-03.png"
+          data-background-size="auto auto">
+          <p>&nbsp;</p>
+        </section>
+
+        <section
+          data-background-image="img/bfs-04.png"
+          data-background-size="auto auto">
+          <p>&nbsp;</p>
         </section>
 
         <section>
@@ -466,7 +576,7 @@ $ sencha app watch
           </p>
           <p>
             <a href="https://rawgit.com/chrismayer/fossgis2017/master/geoext3-talk/index.html">Vortragsfolien</a>,
-            <a href="https://rawgit.com/chrismayer/fossgis2017/master/geoext3-talk/GeoExt3-Universale-WebGIS-Applikationen-mit-OpenLayers-3-und-ExtJS6.pdf">PDF-Version</a>,
+            <a href="https://rawgit.com/chrismayer/fossgis2017/master/geoext3-talk/TODO.pdf">PDF-Version</a>,
             <a href="https://github.com/chrismayer/fossgis2016">git repository</a>
           </p>
         </section>
