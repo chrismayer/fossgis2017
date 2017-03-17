@@ -294,6 +294,136 @@
 
         <section>
           <h1>Aufbau Projektsetup</h1>
+          <h2>Meine erste GeoExt-App in 5 Minuten</h2>
+        </section>
+
+        <section>
+          <h3>Voraussetzungen</h3>
+          <ul>
+            <li><a href="https://www.sencha.com/products/extjs/cmd-download/">Sencha CMD</a> ist installiert</li>
+            <li><a href="https://www.sencha.com/legal/gpl/">ExtJS 6.2</a> heruntergeladen</li>
+          </ul>
+          <p>App-Skeleton erzeugen mit Sencha CMD erzeugen</p>
+          <pre><code data-trim>
+$ sencha -sdk "/path/to/ext-6.2.0/" generate app MyFirstGeoExtApp MyFirstGeoExtApp
+$ cd MyFirstGeoExtApp
+$ sencha app watch
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>OpenLayers zur Anwendung hinzufügen</h3>
+          <p>
+            In <code>app.json</code> Propety "js" wie folgt erweitern:
+          </p>
+          <pre><code data-trim>
+"js": [{
+    "path": "https://openlayers.org/en/v3.20.1/build/ol.js",
+    "remote": true
+  }, {
+    "path": "app.js",
+    "bundle": true
+  }],
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>GeoExt zur Anwendung hinzufügen</h3>
+          <p>GeoExt-Sourcen per git beziehen</p>
+          <pre><code data-trim>
+$ cd packages
+$ git clone https://github.com/geoext/geoext3.git
+          </code></pre>
+          <p>In <code>app.json</code> zum "classpath" hinzufügen:</p>
+          <pre><code data-trim>
+"classpath": [
+    "app",
+    "${toolkit.name}/src",
+    "./packages/geoext3/src"
+],
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Karten-View erzeugen</h3>
+          <p>
+            "Standard" ExtJS-View erzeugen
+          </p>
+          <pre><code data-trim>
+sencha generate view main.Map
+          </code></pre>
+          <p>
+            Anpassungen erzeugter View (<code>app/view/main/Map.js</code>):
+          </p>
+          <ul>
+            <li>Ableitung von <code>GeoExt.component.Map</code> anstelle von <code>Ext.panel.Panel</code></li>
+            <li>Zuweisung des <code>xtype: 'mappanel'</code> (Klassenalias)</li>
+            <li>Hinzufügen eines Properties <code>map</code> (OpenLayers Karte)</li>
+            <li>Entfernen des <code>html</code> Properties</li>
+          </ul>
+        </section>
+
+        <section>
+          <p><code>app/view/main/Map.js</code></p>
+          <pre><code data-trim>
+Ext.define("MyFirstGeoExtApp.view.main.Map",{
+    // extend: "Ext.panel.Panel",
+    extend: "GeoExt.component.Map",
+    xtype: 'mappanel',
+    requires: [
+        "MyFirstGeoExtApp.view.main.MapController",
+        "MyFirstGeoExtApp.view.main.MapModel"
+    ],
+    controller: "main-map",
+    viewModel: {
+        type: "main-map"
+    },
+    // html: "Hello, World!!"
+    map: new ol.Map({
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.Stamen({
+                    layer: 'watercolor'
+                })
+            }),
+            new ol.layer.Tile({
+                source: new ol.source.Stamen({
+                    layer: 'terrain-labels'
+                })
+            })
+        ],
+        view: new ol.View({
+            center: ol.proj.fromLonLat( [-8.751278, 40.611368] ),
+            zoom: 12
+        })
+    })
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Karten-View in die Anwendung einhängen</h3>
+          <p>
+            In <code>classic/src/view/main/Main.js</code> und <code>modern/src/view/main/Main.js</code>
+            folgendes in das Property <code>items</code> einfügen
+          </p>
+          <pre><code data-trim>
+{
+    title: 'GeoExt3 OL3 Map',
+    iconCls: 'fa-map-marker',
+    layout: 'fit',
+    items: [{
+        xtype: 'mappanel'
+    }]
+}
+          </code></pre>
+        </section>
+
+        <section>
+            <pre><code data-trim>
+$ sencha app watch
+            </code></pre>
+            <img src="img/MyFirstGeoExtApp.png" alt="MyFirstGeoExtApp Screenshot" />
         </section>
 
         <section id="thanks-questions">
