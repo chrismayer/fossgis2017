@@ -196,6 +196,12 @@
         </section>
 
         <section>
+          <img style="margin: 0" src="img/v3.0.0-fireworks-2.png" alt="GeoExt Release v3.0.0" />
+          <p style="margin: 0;"><a href="https://github.com/geoext/geoext3/releases">GeoExt v3.0.0 Release</a></p>
+          <p style="margin: 0; font-size: .5em;">Photo By <a href="//commons.wikimedia.org/wiki/User:Iotatau" title="User:Iotatau">Jochen Teufel</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=7235554">Link</a></span>
+        </section>
+
+        <section>
           <h2>Versionen</h2>
           <table>
             <thead>
@@ -231,12 +237,6 @@
         </section>
 
         <section>
-          <img style="margin: 0" src="img/v3.0.0-fireworks-2.png" alt="GeoExt Release v3.0.0" />
-          <p style="margin: 0;"><a href="https://github.com/geoext/geoext3/releases">GeoExt v3.0.0 Release</a></p>
-          <p style="margin: 0; font-size: .5em;">Photo By <a href="//commons.wikimedia.org/wiki/User:Iotatau" title="User:Iotatau">Jochen Teufel</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=7235554">Link</a></span>
-        </section>
-
-        <section>
           <h1>Praxistipps</h1>
           <p>&nbsp;</p>
           <h3>Do's and Don'ts <br/> für die Arbeit mit GeoExt 3</h3>
@@ -248,9 +248,8 @@
           <ul>
               <li>GeoExt via <code>git clone</code></li>
               <li>Zielgruppe festlegen (&rArr; <code>toolkit</code>)</li>
-              <li>Grundsätzlich: Sencha CMD verwenden</li>
-              <li>Manchmal: <code>ext-all-debug.js</code></li>
-              <li>MVVM verwenden</li>
+              <li>Sencha CMD verwenden</li>
+              <li>MVC / MVVM verwenden</li>
               <li><code>sencha app watch</code> &amp; <code>sencha app build</code></li>
               <li>Bei upgrade (etwa OpenLayers), <code>console</code> beachten</li>
               <li>Testing und MVVM: …</li>
@@ -443,7 +442,7 @@ $ sencha app watch
         <section>
           <h3>OpenLayers zur Anwendung hinzufügen</h3>
           <p>
-            In <code>app.json</code> Propety "js" wie folgt erweitern:
+            In <code>app.json</code> Property "js" wie folgt erweitern:
           </p>
           <pre><code data-trim>
 "js": [{
